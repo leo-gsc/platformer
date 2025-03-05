@@ -67,11 +67,11 @@ public class PlayerMovement : MonoBehaviour
         {
             if(horizontalInput == 0)
             {
-                body.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * 160, 0);
+                body.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * 50, 0);
                 transform.localScale = new Vector3(-Mathf.Sign(transform.localScale.x), transform.localScale.y, transform.localScale.z);
             }
             else
-                body.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * 55, 8);
+                body.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * 15, 8);
             wallJumpCooldown = 0;
             //first value is the force applied to eject out of the wall, second one is applied to jump.
         }
