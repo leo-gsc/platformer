@@ -3,7 +3,6 @@ using UnityEngine;
 public class enemy_sideways : MonoBehaviour
 {
 	[SerializeField] float movementDistance;
-	[SerializeField] private float damage;
 	[SerializeField] private float speed;
 	private bool movingLeft;
 	private float leftEdge;
@@ -35,13 +34,6 @@ public class enemy_sideways : MonoBehaviour
 			}
 			else
 				movingLeft = true;
-		}
-	}
-	private void OnTriggerEnter2D(Collider2D collision)
-	{
-		if (collision.tag == "Player")
-		{
-			collision.GetComponent<health>().TakeDamage(damage);
 		}
 	}
 }

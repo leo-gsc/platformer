@@ -9,7 +9,11 @@ public class bossAttacks : MonoBehaviour
     private float leftEdge;
     private float rightEdge;
     private bool canSpawn = false;
-    private GameObject player;
+    private bool spawnTriggered = false;
+    private bool swordAttack = false;
+    private bool magicAttack = false;
+    private Transform playerTransform;
+    private Animator anim;
 
 
 
@@ -17,43 +21,67 @@ public class bossAttacks : MonoBehaviour
     {
         leftEdge = transform.position.x - movementDistance;
         rightEdge = transform.position.x + movementDistance;
-        GameObject player = GameObject.FindWithTag("Player");
     }
 
-
+    void Update()
+    {
+        UpdateMovement();
+    }
     private void UpdateMovement()
     {
-        if (player.transform.position.x < transform.position.x)
+        if (playerTransform != null && !spawnTriggered)
         {
-            Debug.Log("Le joueur est à gauche du boss.");
+            float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
+            if (distanceToPlayer <= 9f)
+            {
+                anim.SetTrigger("boss_spawn");
+                spawnTriggered = true;
+            }
         }
+
         if (movingLeft)
         {
-            if (transform.position.x <= leftEdge)
+            if (transform.position.x > leftEdge)
             {
+                if (playerTransform != null && playerTransform.position.x > transform.position.x)
+                {
+                    magicAttack = true;
+                    MagicAttack();
+                }
                 transform.position = new Vector3(transform.position.x - speed * Time.deltaTime, transform.position.y, transform.position.z);
             }
             else
+            {
                 movingLeft = false;
+            }
         }
         else
         {
             if (transform.position.x < rightEdge)
             {
+                if (playerTransform != null && playerTransform.position.x - transform.position.x <= 2)
+                {
+                    swordAttack = true;
+                    SwordAttack();
+                }
                 transform.position = new Vector3(transform.position.x + speed * Time.deltaTime, transform.position.y, transform.position.z);
             }
             else
+            {
                 movingLeft = true;
+            }
         }
-        
     }
 
     private void SwordAttack()
     {
-
+        anim.SetTrigger("swordAttack");
+        swordAttack = false;
     }
 
     private void MagicAttack()
     {
+        anim.SetTrigger("magicAttack");
+        magicAttack = false;
     }
 }

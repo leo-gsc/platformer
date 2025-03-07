@@ -3,7 +3,6 @@ using System.Collections;
 
 public class fireTrap : MonoBehaviour
 {
-    [SerializeField] private float damage;
     [Header("Firetrap Timers")]
     [SerializeField] private float activationDelay;
     [SerializeField] private float activeTime;
@@ -25,9 +24,6 @@ public class fireTrap : MonoBehaviour
         {
             if (!triggered)
                 StartCoroutine(ActivateFireTrap());
-
-            if (active)
-                collision.GetComponent<health>().TakeDamage(damage);
         }
     }
     private IEnumerator ActivateFireTrap()

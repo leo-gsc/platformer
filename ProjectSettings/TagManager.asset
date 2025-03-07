@@ -6,6 +6,12 @@ TagManager:
   tags:
   - Ground
   - enemy
+  - checkpoint
+  - SpawnPoint
+  - balle
+  - player
+  - danger
+  - Obstacle
   layers:
   - Default
   - TransparentFX
